@@ -44,7 +44,7 @@ form button .search-icon {
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 50px 0 300px 0;
+  padding: 50px 0;
 }
 .pic-container a img {
   width: 300px;
