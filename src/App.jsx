@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { AiOutlineSearch, AiFillCaretRight, AiFillCaretLeft } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiFillCaretRight,
+  AiFillCaretLeft,
+} from "react-icons/ai";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -9,41 +13,42 @@ function App() {
 
   async function fetchData(thisApi) {
     try {
-      const response = await fetch(
-        thisApi,
-        {
-          headers: {
-            Authorization: myApiKey,
-          },
-        }
-      );
+      const response = await fetch(thisApi, {
+        headers: {
+          Authorization: myApiKey,
+        },
+      });
       const responseData = await response.json();
       setData(responseData);
     } catch (error) {
-      alert('Something Went Wrong. Please try again!')        
+      alert("Something Went Wrong. Please try again!");
     }
   }
 
   useEffect(() => {
-    const thisApi = `https://api.pexels.com/v1/search?query=random&per_page=30`
+    const thisApi = `https://api.pexels.com/v1/search?query=random&per_page=30`;
     fetchData(thisApi);
   }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const thisApi = `https://api.pexels.com/v1/search?query=${query}&per_page=30`
+    const thisApi = `https://api.pexels.com/v1/search?query=${query}&per_page=30`;
     fetchData(thisApi);
   }
   function handlePreviousPage() {
     setCurrentPage((prevPage) => prevPage - 1);
-    const thisApi = `https://api.pexels.com/v1/search/?page=${currentPage - 1}&per_page=30&query=${query}`
-    fetchData(thisApi)
+    const thisApi = `https://api.pexels.com/v1/search/?page=${
+      currentPage - 1
+    }&per_page=30&query=${query}`;
+    fetchData(thisApi);
   }
 
   function handleNextPage() {
     setCurrentPage((prevPage) => prevPage + 1);
-    const thisApi = `https://api.pexels.com/v1/search/?page=${currentPage + 1}&per_page=30&query=${query}`
-    fetchData(thisApi)
+    const thisApi = `https://api.pexels.com/v1/search/?page=${
+      currentPage + 1
+    }&per_page=30&query=${query}`;
+    fetchData(thisApi);
   }
 
   return (
@@ -63,7 +68,7 @@ function App() {
         </button>
       </form>
       <main className="pic-container">
-      {data && data.photos.length > 0 ? (
+        {data && data.photos.length > 0 ? (
           <>
             {data.photos.map((photo) => (
               <div key={photo.id}>
@@ -72,15 +77,21 @@ function App() {
                 </a>
               </div>
             ))}
-            <div className="pagination">
-              {currentPage > 1 && (
-                <button onClick={handlePreviousPage}><AiFillCaretLeft /></button>
-              )}
-              <span>{currentPage}</span>
-              {currentPage < data.total_results / 20 && (
-                <button onClick={handleNextPage}><AiFillCaretRight /></button>
-              )}
-            </div>
+            {query && (
+              <div className="pagination">
+                {currentPage > 1 && (
+                  <button onClick={handlePreviousPage}>
+                    <AiFillCaretLeft />
+                  </button>
+                )}
+                <span>{currentPage}</span>
+                {currentPage < data.total_results / 20 && (
+                  <button onClick={handleNextPage}>
+                    <AiFillCaretRight />
+                  </button>
+                )}
+              </div>
+            )}
           </>
         ) : (
           <p>Search Gallery</p>
