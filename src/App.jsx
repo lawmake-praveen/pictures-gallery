@@ -6,7 +6,7 @@ function App() {
   const myApiKey = "60thkqe6Xkv5c2tVCGEWFGW3fU7YK1bR7epYCt0mx2CKMUlQyiWLwLYH";
   const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   async function fetchData(thisApi) {
     try {
       const response = await fetch(
@@ -25,24 +25,24 @@ function App() {
   }
 
   useEffect(() => {
-    const thisApi = `https://api.pexels.com/v1/search?query=random&per_page=20`
+    const thisApi = `https://api.pexels.com/v1/search?query=random&per_page=30`
     fetchData(thisApi);
   }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const thisApi = `https://api.pexels.com/v1/search?query=${query}&per_page=20`
+    const thisApi = `https://api.pexels.com/v1/search?query=${query}&per_page=30`
     fetchData(thisApi);
   }
   function handlePreviousPage() {
     setCurrentPage((prevPage) => prevPage - 1);
-    const thisApi = `https://api.pexels.com/v1/search/?page=${currentPage - 1}&per_page=20&query=${query}`
+    const thisApi = `https://api.pexels.com/v1/search/?page=${currentPage - 1}&per_page=30&query=${query}`
     fetchData(thisApi)
   }
 
   function handleNextPage() {
     setCurrentPage((prevPage) => prevPage + 1);
-    const thisApi = `https://api.pexels.com/v1/search/?page=${currentPage + 1}&per_page=20&query=${query}`
+    const thisApi = `https://api.pexels.com/v1/search/?page=${currentPage + 1}&per_page=30&query=${query}`
     fetchData(thisApi)
   }
 
