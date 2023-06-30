@@ -44,7 +44,7 @@ form button .search-icon {
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 50px 0;
+  padding: 50px 5px;
 }
 .pic-container a img {
   width: 300px;
@@ -73,4 +73,21 @@ form button .search-icon {
   box-shadow: 0px 0px 10px lightgray;
   transform: scale(110%);
 
+}
+
+@media (width < 660px) {
+  .pic-container a img {
+    width: 200px;
+  }
+  .pic-container {
+    gap: 6px;
+  }
+}
+@media (width < 450px) {
+  .pic-container a img {
+    width: 170px;
+  }
+  .pic-container {
+    gap: 4px;
+  }
 }
